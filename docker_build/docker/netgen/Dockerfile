@@ -28,7 +28,7 @@ COPY netgen netgen
 WORKDIR netgen
 
 # build
-RUN ./configure --prefix=/build
+RUN ./configure CFLAGS="-O2 -g" --prefix=/build
 
 RUN make clean && \
     make && \

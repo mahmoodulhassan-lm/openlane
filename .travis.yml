@@ -12,7 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-language: minimal
+language: shell
+os: linux
+dist: xenial
 
 branches:
   only:
@@ -28,9 +30,6 @@ git:
 
 services:
   - docker
-
-os:
-  - linux
 
 jobs:
   include:
@@ -140,10 +139,14 @@ jobs:
       env: TEST_SET=y_huff TOOL=netgen REPO=netgen BRANCH=master EXTRA_FLAGS=-so
 
 before_install:
-  - bash travisCI/run_wrapper.sh travisCI/travisPrebuild.sh
+  - bash travisCI/utils/bash_run_wrapper.sh travisCI/travisPrebuild.sh
 
 install:
-  - sh travisCI/travisBuild.sh
+  - if [ $TRAVIS_BRANCH == "develop-latest_pdk" ]; then
+      sh travisCI/travisBuildLatestPDK.sh;
+    else
+      sh travisCI/travisBuild.sh;
+    fi
 
 script:
   - bash travisCI/travisTest.sh
