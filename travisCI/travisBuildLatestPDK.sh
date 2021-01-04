@@ -12,7 +12,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-echo "Running the standard installation process..."
+echo "Running the latest pdk installation process..."
 mkdir pdks
 export PDK_ROOT=$(pwd)/pdks
 export RUN_ROOT=$(pwd)
@@ -48,7 +48,7 @@ until make -j$(nproc) timing; do
 done
 cd  $PDK_ROOT
 rm -rf open_pdks
-git clone https://github.com/RTimothyEdwards/open_pdks.git open_pdks
+git clone git://opencircuitdesign.com/open_pdks open_pdks
 cd $RUN_ROOT
 make build-pdk
 echo "done installing"
