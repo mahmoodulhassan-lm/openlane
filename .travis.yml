@@ -24,8 +24,6 @@ branches:
     - /^(?i:develop)-.*$/
 git:
   depth: false
-
-git:
   submodules: false
 
 services:
