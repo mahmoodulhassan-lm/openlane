@@ -80,7 +80,7 @@ RUN yum -y install zlib-devel
 
 
 # eigen required by replace, TritonMacroPlace
-RUN git clone https://gitlab.com/libeigen/eigen.git \
+RUN git clone https://gitlab.com/libeigen/eigen.git --branch=3.3 \
     && cd eigen \
     && mkdir build \
     && cd build \
@@ -126,7 +126,7 @@ RUN cp -r build/install/bin /build/
 # OpenDB Python interface
 WORKDIR src/OpenDB
 RUN mkdir build && mkdir -p /build/version && mkdir install
-RUN cd build && cmake -DCMAKE_INSTALL_PREFIX=$(pwd)/install .. && make -j$(nproc) opendbpy
+RUN cd build && cmake -DCMAKE_CXX_STANDARD=17 -DCMAKE_INSTALL_PREFIX=$(pwd)/install .. && make -j$(nproc) opendbpy
 RUN cp -r build/src/swig/python /build/OpenDB_python
 WORKDIR OpenROAD
 
